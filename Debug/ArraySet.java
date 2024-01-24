@@ -37,7 +37,7 @@ public class ArraySet<T> implements SimpleSet<T> {
 
 	@Override
 	public boolean isEmpty() {
-		return (rear > 0);
+		return (rear == 0);
 	}
 
 	@Override

@@ -1,0 +1,9 @@
+Debugging Process
+
+Bug 1:
+Ran the tester (32 passed, 19 failed, 51/111 run). Looked at the first test that failed: emptySet_testIsEmpty.
+Set breakpoint on line 11 where testIsEmpty is called for an empty set. Started debugger.
+Stepped into ArraySet constructor and it was fine. Stepped into testIsEmpty method and it was fine. 
+Stepped into isEmpty method and found the mistake: if rear = 0, it is empty, not if rear > 0.
+
+Bug 2:
