@@ -2,8 +2,22 @@ Debugging Process
 
 Bug 1:
 Ran the tester (32 passed, 19 failed, 51/111 run). Looked at the first test that failed: emptySet_testIsEmpty.
-Set breakpoint on line 11 where testIsEmpty is called for an empty set. Started debugger.
+Set breakpoint on line 111 where testIsEmpty is called for an empty set. Started debugger.
 Stepped into ArraySet constructor and it was fine. Stepped into testIsEmpty method and it was fine. 
 Stepped into isEmpty method and found the mistake: if rear = 0, it is empty, not if rear > 0.
 
 Bug 2:
+Ran the tester again (29 passed, 22 failed, 51/11 run). Looked at the first test that failed: emptySet_addA_A_testIsEmpty.
+Set the breakpoint to 147 where emptySet_addA_A_testIsEmpty is called. Stepped into 
+emptySet_addA_A() and it looked fine. Stepped into emptySet() and it looked fine. Stepped over ArraySet() back into emptySet_addA_A()
+and into add() method. Realized that rear doesn't get incremented, so I added
+rear++.
+
+Bug 3:
+Ran the tester. 93 tests run, 91 passed, and 2 failed. Looked at the first test that failed: A_addB_AB_testRemoveA. Set a 
+breakpoint at line 265. Stepped into A_addB_AB(). Looked fine. Already checked the add() method so stepped over the
+next few lines and back into line 265. Stepped into testRemove. Stepped into remove(). An index out of bound exception had 
+been thrown, so I was already suspicious of the while loops. Stepped over many lines until
+line 74 containing the while loop. On the first time through, where i started at 0, everthing was fine.
+However, when i = 1 (so it was still less than two), the code tried to set the array at index 1 equal to index 2,
+which didn't exist. For that reason, I realized the while loop needed to be changed to i < rear -1 instead of just rear. 

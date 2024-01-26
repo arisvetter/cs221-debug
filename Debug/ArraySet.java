@@ -57,6 +57,7 @@ public class ArraySet<T> implements SimpleSet<T> {
 				expandCapacity();
 			}
 			setArray[rear] = element;
+			rear++;
 		}
 	}
 
@@ -65,12 +66,12 @@ public class ArraySet<T> implements SimpleSet<T> {
 		T retVal = null;
 		int i = 0;
 		//locate the element to be removed
-		while (retVal == null && i < rear) {
+		while ((retVal == null) && (i < rear)) {
 			if (setArray[i].equals(element)) {
 				retVal = setArray[i];
 				//shift all following elements one space forward
 				//so there are no gaps in the array
-				while (i < rear) {
+				while (i < rear - 1) {
 					setArray[i] = setArray[i+1];
 					i++;
 				}
